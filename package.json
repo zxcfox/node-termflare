@@ -1,0 +1,42 @@
+{
+  "name": "termflare",
+  "version": "1.0.0",
+  "description": "Лёгкий модуль для цветного и стилизованного вывода в консоль",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": {
+      "import": "./src/index.js"
+    }
+  },
+  "keywords": [
+    "console",
+    "log",
+    "logger",
+    "color",
+    "chalk",
+    "terminal",
+    "style",
+    "console output",
+    "cli",
+    "termstyle"
+  ],
+  "author": "VoidedFox",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zxcfox/node-termflare"
+  },
+  "bugs": {
+    "url": "https://github.com/zxcfox/node-termflare/issues"
+  },
+  "homepage": "https://github.com/zxcfox/node-termflare#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "luxon": "^3.6.1",
+    "strip-ansi": "^7.1.0"
+  }
+}
