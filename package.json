@@ -1,6 +1,6 @@
 {
   "name": "termflare",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Лёгкий модуль для цветного и стилизованного вывода в консоль",
   "type": "module",
   "main": "./src/index.js",
