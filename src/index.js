@@ -125,11 +125,3 @@ class Terminal {
         console.warn(this.format(chalk.yellow("WARNING"), message));
     }
 }
-
-const terminal = new Terminal();
-
-terminal.Message("Foxes are /yellow(super cute)/!");
-terminal.Warning("Capybara alert! /magenta(Situation escalating)/ 🦫");
-terminal.Error("An /red(unknown error)/ occurred with /yellow(code: 500)/.");
-
-terminal.Message("Nested example: /cyan(Outer /green(Inner /blue(Core)/)/ text)/");
