@@ -19,9 +19,6 @@ const getTimeAndDate = (timezone) => {
     };
 };
 
-/**
- * Класс для форматирования и отображения сообщений в терминале с учётом времени и типа.
- */
 class Terminal {
     /**
      * Создает экземпляр Terminal.
@@ -43,12 +40,56 @@ class Terminal {
      */
     format(prefix, message, debug) {
         const { Time, Date } = getTimeAndDate(this.timezone);
-        let text = `[${Date} || ${Time}] ${prefix} -> ${message}`;
+        let text = `[${Date} || ${Time}] ${prefix} -> ${this.parseColors(message)}`;
         if (debug) {
             text += `\r\n${chalk.gray(debug)}`;
         }
         return text;
     }
+
+    /**
+     * Заменяет вхождения вида /color(текст)/ на соответствующий chalk.<color>(текст)
+     * Поддерживаются цвета chalk (yellow, blue, green, red, cyan, magenta и т.д.)
+     * @param {string} message - Исходное сообщение.
+     * @returns {string} Сообщение с применёнными цветами.
+     */
+    parseColors(message) {
+        const parse = (str, i = 0) => {
+            let result = '';
+
+            while (i < str.length) {
+                if (str[i] === '/' && /[a-z]/i.test(str[i + 1])) {
+                    const match = str.slice(i + 1).match(/^(\w+)\(/);
+                    if (match) {
+                        const color = match[1];
+                        i += 1 + color.length + 1;
+
+                        let nested = '';
+                        let depth = 1;
+                        while (i < str.length && depth > 0) {
+                            if (str[i] === '(') depth++;
+                            else if (str[i] === ')') depth--;
+                            if (depth > 0) nested += str[i];
+                            i++;
+                        }
+
+                        if (str[i] === '/') i++;
+
+                        const inner = parse(nested);
+                        result += chalk[color]?.(inner) ?? chalk.gray(inner);
+                        continue;
+                    }
+                }
+
+                result += str[i++];
+            }
+
+            return result;
+        };
+
+        return parse(message);
+    }
+
 
     /**
      * Удаляет цветовые коды из текста (если используются chalk или ANSI escape codes).
@@ -84,3 +125,11 @@ class Terminal {
         console.warn(this.format(chalk.yellow("WARNING"), message));
     }
 }
+
+const terminal = new Terminal();
+
+terminal.Message("Foxes are /yellow(super cute)/!");
+terminal.Warning("Capybara alert! /magenta(Situation escalating)/ 🦫");
+terminal.Error("An /red(unknown error)/ occurred with /yellow(code: 500)/.");
+
+terminal.Message("Nested example: /cyan(Outer /green(Inner /blue(Core)/)/ text)/");
