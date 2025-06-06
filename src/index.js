@@ -3,14 +3,14 @@ import stripAnsi from 'strip-ansi';
 import { DateTime } from "luxon";
 
 /**
- * Возвращает форматированные дату и время.
- * @param {string} timezone - Часовой пояс (например, "Europe/Moscow").
- * @returns {{ Time: string, Date: string }} Объект с текущими временем и датой.
+ * Returns formatted date and time.
+ * @param {string} timezone - Timezone (e.g., "Europe/Moscow").
+ * @returns {{ Time: string, Date: string }} An object containing the current time and date.
  */
 const getTimeAndDate = (timezone) => {
     const now = DateTime.now().setZone(timezone);
     if (!now.isValid) {
-        throw new Error('Некорректный часовой пояс');
+        throw new Error('Invalid timezone');
     }
 
     return {
@@ -21,8 +21,8 @@ const getTimeAndDate = (timezone) => {
 
 class Terminal {
     /**
-     * Создает экземпляр Terminal.
-     * @param {string} [timezone="Europe/Moscow"] - Часовой пояс по умолчанию.
+     * Creates a Terminal instance.
+     * @param {string} [timezone="Europe/Moscow"] - Default timezone.
      */
     constructor(timezone = "Europe/Moscow") {
         /**
@@ -32,11 +32,11 @@ class Terminal {
     }
 
     /**
-     * Форматирует сообщение с префиксом и текущим временем/датой.
-     * @param {string} prefix - Тип или категория сообщения (например, "INFO", "ERROR").
-     * @param {string} message - Основной текст сообщения.
-     * @param {string|null} [debug=null] - Дополнительная отладочная информация.
-     * @returns {string} Отформатированная строка.
+     * Formats a message with a prefix and current time/date.
+     * @param {string} prefix - Message type or category (e.g., "INFO", "ERROR").
+     * @param {string} message - The main message text.
+     * @param {string|null} [debug=null] - Additional debug information.
+     * @returns {string} The formatted message string.
      */
     format(prefix, message, debug) {
         const { Time, Date } = getTimeAndDate(this.timezone);
@@ -48,10 +48,10 @@ class Terminal {
     }
 
     /**
-     * Заменяет вхождения вида /color(текст)/ на соответствующий chalk.<color>(текст)
-     * Поддерживаются цвета chalk (yellow, blue, green, red, cyan, magenta и т.д.)
-     * @param {string} message - Исходное сообщение.
-     * @returns {string} Сообщение с применёнными цветами.
+     * Replaces occurrences of /color(text)/ with chalk.<color>(text).
+     * Supports chalk colors (yellow, blue, green, red, cyan, magenta, etc.).
+     * @param {string} message - The input message.
+     * @returns {string} The message with colors applied.
      */
     parseColors(message) {
         const parse = (str, i = 0) => {
@@ -90,36 +90,35 @@ class Terminal {
         return parse(message);
     }
 
-
     /**
-     * Удаляет цветовые коды из текста (если используются chalk или ANSI escape codes).
-     * @param {string} text - Текст с цветами.
-     * @returns {string} Очищенный от цвета текст.
+     * Removes color codes from the text (chalk or ANSI escape codes).
+     * @param {string} text - Text with colors.
+     * @returns {string} Text with colors removed.
      */
     clearColour(text) {
         return stripAnsi(text);
     }
 
     /**
-     * Выводит обычное информационное сообщение в консоль.
-     * @param {string} text - Сообщение.
+     * Outputs a standard info message to the console.
+     * @param {string} text - The message.
      */
     Message(text) {
         console.log(this.format(chalk.cyan("INFO"), text));
     }
 
     /**
-     * Выводит сообщение об ошибке в консоль.
-     * @param {string} message - Текст ошибки.
-     * @param {string|null} [debug=null] - Дополнительная информация (stack trace, детали).
+     * Outputs an error message to the console.
+     * @param {string} message - Error text.
+     * @param {string|null} [debug=null] - Additional info (stack trace, details).
      */
     Error(message, debug = null) {
         console.error(this.format(chalk.red("ERROR"), message, debug ?? null));
     }
 
     /**
-     * Выводит предупреждение в консоль.
-     * @param {string} message - Текст предупреждения.
+     * Outputs a warning message to the console.
+     * @param {string} message - Warning text.
      */
     Warning(message) {
         console.warn(this.format(chalk.yellow("WARNING"), message));

@@ -1,6 +1,6 @@
 {
   "name": "termflare",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Лёгкий модуль для цветного и стилизованного вывода в консоль",
   "type": "module",
   "main": "./src/index.js",
@@ -19,7 +19,10 @@
     "style",
     "console output",
     "cli",
-    "termstyle"
+    "termstyle",
+    "termstyle-pro",
+    "termstyle-plus",
+    "style"
   ],
   "author": "VoidedFox",
   "license": "MIT",
