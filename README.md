@@ -75,11 +75,6 @@ You can use any of the following color names in `/color(text)/` markup:
 
 # Output Example
 
-```bash
-[06.06.2025 || 14:23:08] INFO -> Foxes are super cute!
-[06.06.2025 || 14:23:08] WARNING -> Capybara alert! Situation escalating 🦫
-[06.06.2025 || 14:23:08] ERROR -> An unknown error occurred with code: 500.
-[06.06.2025 || 14:23:08] INFO -> Nested example: Outer Inner Core text
-```
+[![photo-2025-06-06-16-56-15.jpg](https://i.postimg.cc/BvqrJ9BJ/photo-2025-06-06-16-56-15.jpg)](https://postimg.cc/3kcSZqqq)
 
 *(Colors are rendered properly in the terminal; nesting works recursively.)*
