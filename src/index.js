@@ -124,3 +124,5 @@ class Terminal {
         console.warn(this.format(chalk.yellow("WARNING"), message));
     }
 }
+
+export default Terminal;
