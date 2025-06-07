@@ -1,7 +1,7 @@
 {
   "name": "termflare",
   "version": "2.0.2",
-  "description": "Лёгкий модуль для цветного и стилизованного вывода в консоль",
+  "description": "A lightweight module for color and stylized output to the console",
   "type": "module",
   "main": "./src/index.js",
   "exports": {
