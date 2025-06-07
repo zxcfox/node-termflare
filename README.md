@@ -1,3 +1,7 @@
+<small>
+I'm sorry for the mistakes. This is my first module, and I'm just learning how to make public modules and work with NPM.
+</small>
+
 <p align="center">
   <img src="https://i.postimg.cc/bJQtqCcP/image.png" alt="Logo"/>
 </p>
